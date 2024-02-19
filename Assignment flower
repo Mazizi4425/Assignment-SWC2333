@@ -1,0 +1,61 @@
+    /**
+ * Programme description : To manage the flower inventory efficiently
+ * @Programmer : MMM
+ * Date : 19 February 2024
+ */
+public class Flower {
+    private String name;
+    private String colour;
+    private double price;
+    private int quantity;
+
+    public Flower(String name, String colour, double price, int quantity) {
+        this.name = name;
+        this.colour = colour;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public String getName() 
+    {
+    return name;
+    }
+
+    public void setName(String name) 
+    {
+    this.name = name;
+    }
+
+    public String getColour() {
+    return colour;
+    }
+
+    public void setColour(String colour) {
+    this.colour = colour;
+    }
+
+    public double getPrice() {
+    return price;
+    }
+
+    public void setPrice(double price) {
+    this.price = price;
+    }
+
+    public int getQuantity() {
+    return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+    this.quantity = quantity;
+    }
+
+    public String toString() {
+        return "Flower{" +
+        "name='" + name + '\'' +
+        ", colour='" + colour + '\'' +
+        ", price=" + price +
+        ", quantity=" + quantity +
+                '}';
+    }
+}
