@@ -1,0 +1,104 @@
+/**
+ * Program description : To implement the FlowerShop as a driver class for the flower management system
+ * Programmer : MMM
+ * Date : 19 February 2024
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class FlowerShop {
+    public static void main(String[] args) {
+        Flower[] inventory = new Flower[10];
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < inventory.length; i++) {
+            System.out.println("Enter data for flower " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Price: ");
+            double price = scanner.nextDouble();
+            System.out.print("Quantity: ");
+            int quantity = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            inventory[i] = new Flower(name, price, quantity);
+        }
+
+        System.out.println("\nFlower Details:");
+        for (Flower flower : inventory) {
+        System.out.println(flower);
+        }
+
+        double totalValue = calculateTotalValue(inventory);
+        System.out.printf("\nTotal value of flower inventory: $%.2f%n", totalValue);
+
+        System.out.print("\nEnter flower name to search: ");
+        String searchName = scanner.nextLine();
+        Flower searchedFlower = searchFlowerByName(inventory, searchName);
+        if (searchedFlower != null) {
+        System.out.println("\nFlower Details: " + searchedFlower);
+        } else {
+        System.out.println("Flower not found in inventory.");
+        }
+
+        System.out.print("\nEnter flower name to restock: ");
+        String restockName = scanner.nextLine();
+        System.out.print("Enter quantity to restock: ");
+        int restockQuantity = scanner.nextInt();
+        restockFlower(inventory, restockName, restockQuantity);
+
+        System.out.println("\nUpdated Flower Details:");
+        for (Flower flower : inventory) {
+         System.out.println(flower);
+        }
+
+        scanner.close();
+    }
+
+    public static double calculateTotalValue(Flower[] inventory) {
+    double totalValue = 0.0;
+     for (Flower flower : inventory) {
+            totalValue += flower.price * flower.quantity;
+        }
+        return totalValue;
+    }
+
+    public static Flower searchFlowerByName(Flower[] inventory, String name) {
+        for (Flower flower : inventory) {
+            if (flower.name.equalsIgnoreCase(name)) {
+                return flower;
+            }
+        }
+        return null;
+    }
+
+    public static void restockFlower(Flower[] inventory, String name, int quantity) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].name.equalsIgnoreCase(name)) {
+                inventory[i].quantity += quantity;
+                return;
+            }
+        }
+    }
+}
+
+class Flower {
+    String name;
+    double price;
+    int quantity;
+
+    public Flower(String name, double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Flower{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
+    }
+}
